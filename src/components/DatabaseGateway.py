@@ -22,7 +22,7 @@ class DatabaseGateway:
 
     def setup_db(self):
         uri = os.getenv("MONGODBURI", "")
-        ping()
+        self.ping()
         client =  MongoClient(uri, server_api=ServerApi('1'))
         mongo_db = client.StockAnalysis
 
