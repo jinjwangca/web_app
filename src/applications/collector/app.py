@@ -3,6 +3,8 @@ from flask_restful import Resource, Api
 from components.DatabaseGateway import DatabaseGateway
 import requests
 import pika, os, logging
+import schedule
+import time
 
 print(os.environ.get('PYTHONPATH'))
 
@@ -42,5 +44,9 @@ def collect_trade_info():
     return data
 
 if __name__ == '__main__':
-    collect_trade_info()
+    #schedule.every().day.at("18:00").do(collect_trade_info)
+    schedule.every(1).minutes.do(collect_trade_info)
+    while True:
+        schedule.run_pending()  # Run all scheduled jobs
+        time.sleep(10)
     #app.run(debug=False, port=8002)
