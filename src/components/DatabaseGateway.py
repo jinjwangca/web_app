@@ -3,6 +3,9 @@ from pymongo.server_api import ServerApi
 import os
 import json
 import pymongo
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 
 class DatabaseGateway:
     def __init__(self):
@@ -18,6 +21,7 @@ class DatabaseGateway:
             client.admin.command('ping')
             print("Pinged your deployment. You successfully connected to MongoDB!")
         except Exception as e:
+            logging(e)
             print(e)
 
     def setup_db(self):
