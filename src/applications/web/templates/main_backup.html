@@ -15,51 +15,46 @@
         h1, h2 {
             text-align: center;
             color: #2c3e50;
-            margin: 0;
         }
         h2 {
-            margin-top: 10px;
-            font-size: 1.2em;
+            margin-top: 0;
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
-            padding: 30px;
+            padding: 20px;
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         p {
             text-align: center;
-            font-size: 1.1em;
-            margin-bottom: 20px;
+            font-size: 1.2em;
         }
         form {
-            display: flex;
-            justify-content: center;
+            text-align: center;
             margin: 10px 0;
         }
         input[type="submit"] {
-            padding: 12px 25px;
+            padding: 10px 20px;
             font-size: 1em;
             color: #fff;
             background-color: #3498db;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s;
         }
         input[type="submit"]:hover {
             background-color: #2980b9;
-            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Welcome to TickerIntelli!</h1>
-    <h2>Discover the top 20 gainers, losers, and most active traded tickers in the US market from the previous trading day.</h2>
-    <p>Select a category below for more details:</p>
+    <h2>This page displays the top 20 gainers, losers, and most active traded tickers in the US market from the previous trading day.</h2>
+    <p>Please click a button below for details.</p>
     <form action="/gainer" method="GET">
         <input type="submit" value="Top 20 Gainers">
     </form>
