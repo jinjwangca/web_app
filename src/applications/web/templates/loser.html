@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %}This page displays the top 20 losers in the US market from the previous trading day{% endblock %}</h2>
+    <p>Data source last updated at : {{ date }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Price</th>
+                <th>Change Amount</th>
+                <th>Change Percentage</th>
+                <th>Volume</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ticker in tickers %}
+            <tr>
+                <td>{{ ticker['ticker'] }}</td>
+                <td>{{ ticker['price'] }}</td>
+                <td>{{ ticker['change_amount'] }}</td>
+                <td>{{ ticker['change_percentage'] }}</td>
+                <td>{{ ticker['volume'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

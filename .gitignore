@@ -1,0 +1,6 @@
+.env
+venv
+.env.swp
+__pycache__
+src/components/__pycache__
+.idea
