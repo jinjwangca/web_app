@@ -10,6 +10,7 @@ class DatabaseGateway:
 
     def ping(self):
         uri = os.getenv("MONGODBURI", "")
+        print(uri)
         # Create a new client and connect to the server
         client = MongoClient(uri, server_api=ServerApi('1'))
         # Send a ping to confirm a successful connection
@@ -21,6 +22,7 @@ class DatabaseGateway:
 
     def setup_db(self):
         uri = os.getenv("MONGODBURI", "")
+        ping()
         client =  MongoClient(uri, server_api=ServerApi('1'))
         mongo_db = client.StockAnalysis
 
@@ -53,6 +55,7 @@ class DatabaseGateway:
             dbcollection = self.db[collection_name]
             return dbcollection.find_one({"_id":id})['data']
         except Exception as e:
+            print(e)
             return None
 
     def get_all_data(self, collection_name):
