@@ -3,7 +3,6 @@ from flask_restful import Resource, Api
 from components.DatabaseGateway import DatabaseGateway
 import requests
 import pika, os, logging
-from dotenv import load_dotenv
 
 print(os.environ.get('PYTHONPATH'))
 

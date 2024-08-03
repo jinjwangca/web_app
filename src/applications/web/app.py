@@ -1,6 +1,5 @@
 from flask import Flask, request, url_for, render_template
 import os, logging
-from dotenv import load_dotenv
 from components.DatabaseGateway import DatabaseGateway
 
 print(os.environ.get('PYTHONPATH'))
