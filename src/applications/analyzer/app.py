@@ -11,44 +11,31 @@ app = Flask(__name__)
 gateway = DatabaseGateway()
 
 def callback(ch, method, properties, body):
-    print("message processing")
-    print(f" [x] Received {body}")
+    print("processing trade info")
+    print(f"Received {body}")
     data = gateway.get_data("1","TradeInfo")
     print(data)
     gainer = data["top_gainers"]
     print("----------------------------")
-    print(gainer)
     if gainer is not None:
         gateway.delete_all_data("Gainer")
-        print("all records deleted from Gainer")
-        print(gateway.get_all_data('Gainer'))
-        print("----------------------------")
         gateway.add_data("1",gainer,"Gainer")
         print(gateway.get_all_data('Gainer'))
-    loser = data["top_losers"]
     print("----------------------------")
-    print(loser)
+    loser = data["top_losers"]
     if loser is not None:
         gateway.delete_all_data("Loser")
-        print("all records deleted from Loser")
-        print(gateway.get_all_data('Loser'))
-        print("----------------------------")
         gateway.add_data("1",loser,"Loser")
         print(gateway.get_all_data('Loser'))
-    active = data["most_actively_traded"]
     print("----------------------------")
-    print(active)
+    active = data["most_actively_traded"]
     if active is not None:
         gateway.delete_all_data("Active")
-        print("all records deleted from Active")
-        print(gateway.get_all_data('Active'))
-        print("----------------------------")
         gateway.add_data("1",active,"Active")
         print(gateway.get_all_data('Active'))
     print(" message processing finished")
 
 def consume_rabbit_mq():
-    queue_name = "analyzer"
     url = os.getenv("RABBITMQURL", "")
     queue_name = "analyzer"
     try:

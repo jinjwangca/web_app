@@ -29,19 +29,27 @@ def send_rabbit_mq(message):
         print(e)
         pass
 
-@app.route('/collect', methods=['GET'])
-def collect_trade_info():
+def retrieve_trade_info():
     url = os.getenv("TRADEINFOURL", "")
     r = requests.get(url)
     data = r.json()
+    print(data)
+    return data
+
+def save_trade_info(data):
     if data is not None:
         gateway.delete_all_data("TradeInfo")
-        print("all records deleted from TradeInfo")
-        print(gateway.get_all_data('TradeInfo'))
         gateway.add_data("1",data,"TradeInfo")
-        print("before send rabbit mq")
-        send_rabbit_mq("analyze")
     return data
+
+@app.route('/collect', methods=['POST'])
+def collect_trade_info():
+    print("retrieving trade info")
+    data = retrieve_trade_info()
+    print("saving trade info to database")
+    save_trade_info(data)
+    print("sending message to rabbit mq")
+    send_rabbit_mq("analyze")
 
 if __name__ == '__main__':
     #schedule.every().day.at("18:00").do(collect_trade_info)
