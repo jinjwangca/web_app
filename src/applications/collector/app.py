@@ -52,8 +52,8 @@ def collect_trade_info():
     send_rabbit_mq("analyze")
 
 if __name__ == '__main__':
-    #schedule.every().day.at("18:00").do(collect_trade_info)
-    schedule.every(1).minutes.do(collect_trade_info)
+    schedule.every().day.at("18:00").do(collect_trade_info)
+    #schedule.every(1).minutes.do(collect_trade_info)
     while True:
         schedule.run_pending()  # Run all scheduled jobs
         time.sleep(10)
