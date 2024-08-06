@@ -48,6 +48,10 @@ def get_active_report():
     print(data)
     return render_template('active.html', tickers=data, date=lastupdated )
 
+@app.route('/health-check', methods=['GET'])
+def health_check():
+    return jsonify(message='I am healthy')
+
 @app.route('/hello', methods=['GET'])
 def hello():
     return jsonify(message='Hello, World!')
