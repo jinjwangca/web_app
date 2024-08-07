@@ -23,7 +23,9 @@ jobs:
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=src" >> $GITHUB_ENV
       - name: Set MONGODBURI
-        run: echo "MONGODBURI=${{ secrets.MONGODBURI }}" >> $GITHUB_ENV
+        run: |
+          echo "MONGODBURI=${{ secrets.MONGODBURI }}"
+          echo "MONGODBURI=${{ secrets.MONGODBURI }}" >> $GITHUB_ENV
       - name: Run tests
         run: |
           python -m unittest discover -s src/tests/unit/ -p "*.py"
