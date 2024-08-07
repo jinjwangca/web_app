@@ -27,3 +27,4 @@ jobs:
           python -m unittest discover -s src/tests/unit/ -p "*.py"
         env:
           PYTHONPATH: ${{ env.PYTHONPATH }}
+          MONGODBURI: ${{ secrets.MONGODBURI }}
