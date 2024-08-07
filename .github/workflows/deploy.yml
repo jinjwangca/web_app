@@ -26,4 +26,4 @@ jobs:
         run: |
           python -m unittest discover -s src/tests/unit/ -p "*.py"
         env:
-          PYTHONPATH: ${{ secrets.PYTHONPATH }}
+          PYTHONPATH: ${{ env.PYTHONPATH }}
