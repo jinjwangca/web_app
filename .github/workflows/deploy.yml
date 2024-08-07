@@ -24,6 +24,13 @@ jobs:
         run: echo "PYTHONPATH=src" >> $GITHUB_ENV
       - name: Set MONGODBURI
         run: echo "MONGODBURI=${{ secrets.MONGODBURI }}" >> $GITHUB_ENV
+      - name: Print environment variable for debugging
+        run: |
+          echo "MONGODBURI is set."
+          # For debugging purposes, use a placeholder or substring of the secret to avoid exposing the full secret
+          echo "MONGODBURI starts with: ${MONGODBURI:0:10}..."
+        env:
+          MONGODBURI: ${{ secrets.MONGODBURI }}
       - name: Run tests
         run: |
           python -m unittest discover -s src/tests/unit/ -p "*.py"
