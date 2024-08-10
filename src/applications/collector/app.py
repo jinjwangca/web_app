@@ -38,9 +38,15 @@ def retrieve_trade_info():
 
 def save_trade_info(data):
     if data is not None:
+        lastupdated = data["last_updated"]
+        move_to_history(lastupdated, gateway.get_data("1","TradeInfo"), "TradeInfoHistory")
         gateway.delete_all_data("TradeInfo")
         gateway.add_data("1",data,"TradeInfo")
     return data
+
+def move_to_history(lastupdated, data, collection):
+    if lastupdated is not None:
+        gateway.add_data(lastupdated, data, collection)
 
 @app.route('/collect', methods=['POST'])
 def collect_trade_info():
@@ -52,8 +58,7 @@ def collect_trade_info():
     send_rabbit_mq("analyze")
 
 if __name__ == '__main__':
-    schedule.every().day.at("18:00").do(collect_trade_info)
-    #schedule.every(1).minutes.do(collect_trade_info)
+    schedule.every().day.at("18:00").do(collect_trade_info, 'It is 18:00')
     while True:
         schedule.run_pending()  # Run all scheduled jobs
         time.sleep(10)

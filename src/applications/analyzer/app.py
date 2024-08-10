@@ -14,26 +14,42 @@ def callback(ch, method, properties, body):
     print("processing trade info")
     print(f"Received {body}")
     data = gateway.get_data("1","TradeInfo")
-    print(data)
+    if data is not None:
+        analyze_gainer(data)
+        analyze_loser(data)
+        analyze_active(data)
+    print(" message processing finished")
+
+def analyze_gainer(data):
     gainer = data["top_gainers"]
-    print("----------------------------")
+    lastupdated = data["last_updated"]
     if gainer is not None:
+        move_to_history(lastupdated, gateway.get_data("1","Gainer"), "GainerHistory")
         gateway.delete_all_data("Gainer")
         gateway.add_data("1",gainer,"Gainer")
         print(gateway.get_all_data('Gainer'))
-    print("----------------------------")
+
+def analyze_loser(data):
     loser = data["top_losers"]
+    lastupdated = data["last_updated"]
     if loser is not None:
+        move_to_history(lastupdated, gateway.get_data("1","Loser"), "LoserHistory")
         gateway.delete_all_data("Loser")
         gateway.add_data("1",loser,"Loser")
         print(gateway.get_all_data('Loser'))
-    print("----------------------------")
+
+def analyze_active(data):
     active = data["most_actively_traded"]
+    lastupdated = data["last_updated"]
     if active is not None:
+        move_to_history(lastupdated, gateway.get_data("1","Active"), "ActiveHistory")
         gateway.delete_all_data("Active")
         gateway.add_data("1",active,"Active")
         print(gateway.get_all_data('Active'))
-    print(" message processing finished")
+
+def move_to_history(lastupdated, data, collection):
+    if lastupdated is not None:
+        gateway.add_data(lastupdated, data, collection)
 
 def consume_rabbit_mq():
     url = os.getenv("RABBITMQURL", "")
