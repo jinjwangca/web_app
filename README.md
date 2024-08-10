@@ -5,6 +5,7 @@ trends with comprehensive data on the best-performing stocks, those experiencing
 significant declines, and the most frequently traded securities in the US market. Utilizing
 cutting-edge market intelligence, these unique alternative datasets are designed to elevate
 your trading strategies and enhance market research, taking them to the next level.
+
 This project consists of three distinct applications: Web, Data Analyzer, and Data Collector.
 The end user interacts with the Web application, which responds with data processed by
 the Data Analyzer. The Data Analyzer retrieves data from a database populated by the Data
@@ -132,8 +133,7 @@ i) MONGODBURI
 ii) RABBITMQURL
 
 iii) TRADEINFOURL
-https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apik
-ey=demo
+https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=demo
 
 iv) PYTHONPATH env var value needs to be src
 ### How to run unit tests and integration tests
