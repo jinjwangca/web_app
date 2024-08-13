@@ -46,7 +46,7 @@ the top 20 losers in the US market from the previous trading day.
 page that displays the top 20 most active traded tickers in the US market from
 the previous trading day.
 
-• Metrics is displayed at https://jinjwang-web-appf1c83a735e77.herokuapp.com/metrics
+• Metrics is displayed at https://jinjwang-web-app-f1c83a735e77.herokuapp.com/metrics
 
 ### Web application, basic form, reporting
 • HTML pages, CSS, JavaScript
